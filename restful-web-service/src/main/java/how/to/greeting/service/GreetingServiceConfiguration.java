@@ -20,15 +20,9 @@ public class GreetingServiceConfiguration {
     @Value("${greeting.default}")
     public String defaultGreeting;
 
-    private void updateId() {
-        count.addAndGet(1);
-        log.debug("ID has been updated.");
-    }
-
     public int getId() {
-        updateId();
-        log.debug("Current ID {}", count.get() - 1);
-        return count.get() - 1;
+        log.debug("Current ID {}", count.get());
+        return count.getAndIncrement();
     }
 
     public String getNameGreeting(String name) {
